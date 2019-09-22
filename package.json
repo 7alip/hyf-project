@@ -1,0 +1,19 @@
+{
+  "name": "hyf-project",
+  "version": "1.0.0",
+  "description": "Hack Your Social",
+  "main": "server/index.js",
+  "scripts": {
+    "install-server": "cd server && yarn",
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^4.1.2",
+    "nodemon": "^1.19.2"
+  }
+}
