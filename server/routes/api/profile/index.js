@@ -15,12 +15,12 @@ const getGithubRepos = require('./getGithubRepos');
 
 const { check } = require('express-validator');
 
-// @route   GET api/profile/me
+// @route   GET /api/profile/me
 // @desc    Get current user profile
 // @access  Private
 router.get('/me', auth, getCurrentProfile);
 
-// @route   POST api/profile
+// @route   POST /api/profile
 // @desc    Create or update user profile
 // @access  Private
 router.post(
@@ -39,22 +39,22 @@ router.post(
   createUpdateProfile
 );
 
-// @route   GET api/profile
+// @route   GET /api/profile
 // @desc    Get all profiles
 // @access  Public
 router.get('/', getAllProfiles);
 
-// @route   GET api/profile/user/:user_id
+// @route   GET /api/profile/user/:user_id
 // @desc    Get profile by id
 // @access  Private
 router.get('/user/:user_id', auth, getUserProfile);
 
-// @route   DELETE api/profile/user/:user_id
+// @route   DELETE /api/profile/user/:user_id
 // @desc    Delete profile, user & posts
 // @access  Private
 router.delete('/', auth, deleteProfileAndUser);
 
-// @route   PUT api/profile/experience
+// @route   PUT /api/profile/experience
 // @desc    Add profile experience
 // @access  Private
 router.put(
@@ -76,12 +76,12 @@ router.put(
   updateExperience
 );
 
-// @route   DELETE api/profile/experience/:id
+// @route   DELETE /api/profile/experience/:id
 // @desc    Add profile experience
 // @access  Private
 router.delete('/experience/:id', auth, deleteExperience);
 
-// @route   PUT api/profile/education
+// @route   PUT /api/profile/education
 // @desc    Add profile education
 // @access  Private
 router.put(
@@ -106,12 +106,12 @@ router.put(
   updateEducation
 );
 
-// @route   DELETE api/profile/experience/:id
+// @route   DELETE /api/profile/experience/:id
 // @desc    Add profile experience
 // @access  Private
 router.delete('/education/:id', auth, deleteEducation);
 
-// @route   GET api/profile/github/:username
+// @route   GET /api/profile/github/:username
 // @desc    Get user repos from github
 // @access  Public
 router.get('/github/:username', getGithubRepos);

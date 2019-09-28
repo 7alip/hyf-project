@@ -6,7 +6,7 @@ const ProfileSchema = new Schema({
   website: { type: String },
   location: { type: String },
   status: { type: String, required: true },
-  skills: { type: [String], required: true },
+  skills: { type: String, required: true },
   bio: { type: String },
   githubusername: { type: String },
   experiences: [

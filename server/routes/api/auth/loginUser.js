@@ -17,14 +17,18 @@ const loginUser = async (req, res, next) => {
     let user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(400).json({ error: [{ msg: 'Invalid credentials!' }] });
+      return res
+        .status(400)
+        .json({ error: [{ message: 'Invalid credentials!' }] });
     }
 
     // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return res.status(400).json({ error: [{ msg: 'Invalid credentials!' }] });
+      return res
+        .status(400)
+        .json({ error: [{ message: 'Invalid credentials!' }] });
     }
 
     // Return jsonwebtoken

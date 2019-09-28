@@ -18,7 +18,7 @@ const getGithubRepos = async (req, res) => {
       if (error) console.error(error);
 
       if (response.statusCode !== 200)
-        return res.status(404).json({ msg: 'No github profile found' });
+        return res.status(404).json({ message: 'No github profile found' });
 
       res.json(JSON.parse(body));
     });

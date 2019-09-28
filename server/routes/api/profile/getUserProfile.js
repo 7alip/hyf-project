@@ -9,14 +9,14 @@ const getUserProfile = async (req, res) => {
     if (!profile)
       return res
         .status(400)
-        .json({ msg: 'There is no profile for this user!' });
+        .json({ message: 'There is no profile for this user!' });
 
     res.json(profile);
   } catch (error) {
     console.error(error.message);
 
     if (error.kind === 'ObjectId')
-      return res.status(400).json({ msg: 'Profile not found!' });
+      return res.status(400).json({ message: 'Profile not found!' });
 
     res.status(500).send('Server error!');
   }

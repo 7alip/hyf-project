@@ -7,13 +7,13 @@ const { check } = require('express-validator');
 const getUser = require('./getUser');
 const loginUser = require('./loginUser');
 
-// @route   GET api/auth
+// @route   GET /api/auth
 // @desc    Test route
 // @access  Private
 router.get('/', auth, getUser);
 
 /**
- * @route POST api/auth
+ * @route POST /api/auth
  * @desc Login user
  * @access Public
  */

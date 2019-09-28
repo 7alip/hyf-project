@@ -6,7 +6,7 @@ const registerUser = require('./registerUser');
 const { check } = require('express-validator');
 
 /**
- * @route POST api/users
+ * @route POST /api/users
  * @desc Register user
  * @access Public
  */

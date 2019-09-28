@@ -4,9 +4,13 @@
   "description": "Hack Your Social",
   "main": "server/index.js",
   "scripts": {
-    "install-server": "cd server && yarn",
+    "install-server": "npm install --prefix server",
+    "install-client": "npm install --prefix client",
+    "install-all": "concurrently npm:install-server npm:install-client",
     "start": "node server",
-    "server": "nodemon server"
+    "server": "nodemon server",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently npm:server npm:client"
   },
   "keywords": [],
   "author": "",

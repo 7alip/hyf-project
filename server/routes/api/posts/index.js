@@ -11,7 +11,7 @@ const unlikePost = require('./unlikePost');
 const createComment = require('./createComment');
 const deleteComment = require('./deleteComment');
 
-// @route   POST api/posts
+// @route   POST /api/posts
 // @desc    Create a post
 // @access  Private
 router.post(
@@ -27,32 +27,32 @@ router.post(
   createPost
 );
 
-// @route   GET api/posts
+// @route   GET /api/posts
 // @desc    Get all post
 // @access  Private
 router.get('/', auth, getAllPosts);
 
-// @route   GET api/posts/:id
+// @route   GET /api/posts/:id
 // @desc    Get all post
 // @access  Private
 router.get('/:id', auth, getPostById);
 
-// @route   DELETE api/posts/:id
+// @route   DELETE /api/posts/:id
 // @desc    Get all post
 // @access  Private
 router.delete('/:id', auth, deletePost);
 
-// @route   PUT api/posts/like/:id
+// @route   PUT /api/posts/like/:id
 // @desc    Like a post
 // @access  Private
 router.put('/like/:id', auth, likePost);
 
-// @route   PUT api/posts/unlike/:id
+// @route   PUT /api/posts/unlike/:id
 // @desc    Unlike a post
 // @access  Private
 router.put('/unlike/:id', auth, unlikePost);
 
-// @route   POST api/posts/comment/:id
+// @route   POST /api/posts/comment/:id
 // @desc    Comment on a post
 // @access  Private
 router.post(
@@ -68,7 +68,7 @@ router.post(
   createComment
 );
 
-// @route   DELETE api/posts/comment/:id
+// @route   DELETE /api/posts/comment/:id
 // @desc    Delete comment of a post
 // @access  Private
 router.delete('/comment/:id/:comment_id', auth, deleteComment);

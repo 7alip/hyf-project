@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Welcome To The Developer Connector</title>
+  </head>
+  <body>
+    <nav className="navbar bg-dark">
+      <h1>
+        <Link to="/index"><i className="fas fa-code"></i> DevConnector</Link>
+      </h1>
+      <ul>
+        <li><Link to="/profiles">Developers</Link></li>
+        <li><Link to="/posts">Posts</Link></li>
+        <li>
+          |
+          <Link to="/dashboard" title="Dashboard"
+            ><i className="fas fa-user"></i>
+            <span className="hide-sm">Dashboard</span></a
+          >
+        </li>
+        <li>
+          <Link to="/login" title="Logout">
+            <i className="fas fa-sign-out-alt"></i>
+            <span className="hide-sm">Logout</span></a
+          >
+        </li>
+      </ul>
+    </nav>
+    <section className="container">
+      <Link to="/posts" className="btn">Back To Posts</Link>
+      <div className="post bg-white p-1 my-1">
+        <div>
+          <Link to="/profile">
+            <img
+              className="round-img"
+              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+              alt=""
+            />
+            <h4>John Doe</h4>
+          </Link>
+        </div>
+        <div>
+          <p className="my-1">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
+            possimus corporis sunt necessitatibus! Minus nesciunt soluta
+            suscipit nobis. Amet accusamus distinctio cupiditate blanditiis
+            dolor? Illo perferendis eveniet cum cupiditate aliquam?
+          </p>
+        </div>
+      </div>
+
+      <div className="post-form">
+        <div className="bg-primary p">
+          <h3>Leave A Comment</h3>
+        </div>
+        <form className="form my-1">
+          <textarea
+            name="text"
+            cols="30"
+            rows="5"
+            placeholder="Comment on this post"
+            required
+          ></textarea>
+          <input type="submit" className="btn btn-dark my-1" value="Submit" />
+        </form>
+      </div>
+
+      <div className="comments">
+        <div className="post bg-white p-1 my-1">
+          <div>
+            <Link to="/profile">
+              <img
+                className="round-img"
+                src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+                alt=""
+              />
+              <h4>John Doe</h4>
+            </Link>
+          </div>
+          <div>
+            <p className="my-1">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
+              possimus corporis sunt necessitatibus! Minus nesciunt soluta
+              suscipit nobis. Amet accusamus distinctio cupiditate blanditiis
+              dolor? Illo perferendis eveniet cum cupiditate aliquam?
+            </p>
+             <p className="post-date">
+                Posted on 04/16/2019
+            </p>
+          </div>
+        </div>
+
+        <div className="post bg-white p-1 my-1">
+          <div>
+            <Link to="/profile">
+              <img
+                className="round-img"
+                src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+                alt=""
+              />
+              <h4>John Doe</h4>
+            </Link>
+          </div>
+          <div>
+            <p className="my-1">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
+              possimus corporis sunt necessitatibus! Minus nesciunt soluta
+              suscipit nobis. Amet accusamus distinctio cupiditate blanditiis
+              dolor? Illo perferendis eveniet cum cupiditate aliquam?
+            </p>
+             <p className="post-date">
+                Posted on 04/16/2019
+            </p>
+             <button      
+            type="button"
+            className="btn btn-danger"
+          >
+            <i className="fas fa-times"></i>
+          </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

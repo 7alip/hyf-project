@@ -8,13 +8,13 @@ const deleteComment = async (req, res) => {
     const comment = post.comments.find(c => c.id === req.params.comment_id);
 
     // Make sure comment exists
-    if (!comment) return res.status(404).json({ msg: 'Comment not found' });
+    if (!comment) return res.status(404).json({ message: 'Comment not found' });
 
-    if (!post) return res.status(404).json({ msg: 'Post not found' });
+    if (!post) return res.status(404).json({ message: 'Post not found' });
 
     // Check user
     if (post.user.toString() !== req.user.id)
-      return res.status(401).json({ msg: 'User not authorized' });
+      return res.status(401).json({ message: 'User not authorized' });
 
     const removeIndex = post.comments
       .map(c => c.user.toString())
@@ -29,7 +29,7 @@ const deleteComment = async (req, res) => {
     console.error(error.message);
 
     if (error.kind === 'ObjectId')
-      return res.status(404).json({ msg: 'Post not found' });
+      return res.status(404).json({ message: 'Post not found' });
 
     res.status(500).send('Server error!');
   }
