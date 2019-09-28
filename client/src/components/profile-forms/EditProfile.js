@@ -30,7 +30,6 @@ const EditProfile = ({
 
   useEffect(() => {
     getCurrentProfile();
-
     setFormData({
       company: loading || !profile.company ? '' : profile.company,
       website: loading || !profile.website ? '' : profile.website,
@@ -40,11 +39,11 @@ const EditProfile = ({
       githubusername:
         loading || !profile.githubusername ? '' : profile.githubusername,
       bio: loading || !profile.bio ? '' : profile.bio,
-      twitter: loading || !profile.twitter ? '' : profile.twitter,
-      facebook: loading || !profile.facebook ? '' : profile.facebook,
-      linkedin: loading || !profile.linkedin ? '' : profile.linkedin,
-      youtube: loading || !profile.youtube ? '' : profile.youtube,
-      instagram: loading || !profile.instagram ? '' : profile.instagram
+      twitter: loading || !profile.social ? '' : profile.social.twitter,
+      facebook: loading || !profile.social ? '' : profile.social.facebook,
+      linkedin: loading || !profile.social ? '' : profile.social.linkedin,
+      youtube: loading || !profile.social ? '' : profile.social.youtube,
+      instagram: loading || !profile.social ? '' : profile.social.instagram
     });
   }, [loading, getCurrentProfile]);
 
@@ -75,7 +74,7 @@ const EditProfile = ({
 
   return (
     <>
-      <h1 className="large text-primary">Create Your Profile</h1>
+      <h1 className="large text-primary">Edit Your Profile</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Let's get some information to make your
         profile stand out
