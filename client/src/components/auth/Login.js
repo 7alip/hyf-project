@@ -40,7 +40,7 @@ const Login = ({ login, isAuthenticated }) => {
             placeholder="Email Address"
             name="email"
             required
-            autoComplete="off"
+            autoComplete="on"
           />
         </div>
         <div className="form-group">
@@ -50,7 +50,7 @@ const Login = ({ login, isAuthenticated }) => {
             type="password"
             placeholder="Password"
             name="password"
-            autoComplete="off"
+            autoComplete="on"
           />
         </div>
         <input type="submit" className="btn btn-primary" value="Login" />
