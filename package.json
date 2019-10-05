@@ -9,7 +9,7 @@
   "scripts": {
     "install-server": "npm install --prefix server",
     "client-build": "npm run build --prefix client",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false concurrently npm:install-server npm:install-client npm:client-build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false install --prefix server && npm install --prefix client && npm run build --prefix client",
     "install-client": "npm install --prefix client",
     "install-all": "concurrently npm:install-server npm:install-client",
     "start": "cd server && node index.js",
