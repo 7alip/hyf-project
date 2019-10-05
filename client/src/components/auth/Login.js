@@ -4,6 +4,19 @@ import { connect } from 'react-redux';
 import { login } from '../../redux/actions/auth-action';
 import PropTypes from 'prop-types';
 
+import {
+  Form,
+  Input,
+  Button,
+  Segment,
+  Grid,
+  GridColumn,
+  Header,
+  FormField,
+  Message,
+  Icon
+} from 'semantic-ui-react';
+
 const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: '',
@@ -26,39 +39,52 @@ const Login = ({ login, isAuthenticated }) => {
   }
 
   return (
-    <>
-      <h1 className="large text-primary">Sign In</h1>
-      <p className="lead">
-        <i className="fas fa-user"></i> Sign into Your Account
-      </p>
-      <form className="form" onSubmit={onSubmit}>
-        <div className="form-group">
-          <input
-            onChange={onChange}
-            value={email}
-            type="email"
-            placeholder="Email Address"
-            name="email"
-            required
-            autoComplete="on"
-          />
-        </div>
-        <div className="form-group">
-          <input
-            onChange={onChange}
-            value={password}
-            type="password"
-            placeholder="Password"
-            name="password"
-            autoComplete="on"
-          />
-        </div>
-        <input type="submit" className="btn btn-primary" value="Login" />
-      </form>
-      <p className="my-1">
-        Don't have an account? <Link to="/register">Sign Up</Link>
-      </p>
-    </>
+    <Grid
+      style={{ height: 'calc(100vh - 4em)' }}
+      textAlign="center"
+      verticalAlign="middle">
+      <GridColumn style={{ maxWidth: 450 }}>
+        <Header as="h2">Sign In</Header>
+        <p>
+          <Icon name="user"></Icon> Sign into Your Account
+        </p>
+        <Segment stacked>
+          <Form size="large" onSubmit={onSubmit}>
+            <FormField>
+              <Input
+                icon="at"
+                onChange={onChange}
+                value={email}
+                type="email"
+                placeholder="Email Address"
+                name="email"
+                required
+                autoComplete="on"
+                fluid
+              />
+            </FormField>
+            <FormField>
+              <Input
+                icon="lock"
+                onChange={onChange}
+                value={password}
+                type="password"
+                placeholder="Password"
+                name="password"
+                autoComplete="on"
+                fluid
+              />
+            </FormField>
+            <Button fluid size="large" type="submit" color="blue">
+              Login
+            </Button>
+          </Form>
+          <Message color="blue">
+            Don't have an account? <Link to="/register">Sign Up</Link>
+          </Message>
+        </Segment>
+      </GridColumn>
+    </Grid>
   );
 };
 

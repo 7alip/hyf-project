@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createProfile } from '../../redux/actions/profile-actions';
+import { Form } from 'semantic-ui-react';
 
 const CreateProfile = ({ createProfile, history }) => {
   const [formData, setFormData] = useState({
@@ -52,8 +53,7 @@ const CreateProfile = ({ createProfile, history }) => {
         <i className="fas fa-user"></i> Let's get some information to make your
         profile stand out
       </p>
-      <small>* = required field</small>
-      <form className="form" onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <div className="form-group">
           <select name="status" value={status} onChange={handleChange}>
             <option value="0">* Select Professional Status</option>
@@ -212,7 +212,7 @@ const CreateProfile = ({ createProfile, history }) => {
         <Link className="btn btn-light my-1" to="/dashboard">
           Go Back
         </Link>
-      </form>
+      </Form>
     </>
   );
 };

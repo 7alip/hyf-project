@@ -3,44 +3,50 @@ import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { deleteExperience } from '../../redux/actions/profile-actions';
+import { Table, Button, Header, Icon } from 'semantic-ui-react';
 
 const Experience = ({ experience, deleteExperience }) => {
   return (
     <>
-      <h2 className="my-2">Experience Credentials</h2>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Company</th>
-            <th className="hide-sm">Title</th>
-            <th className="hide-sm">Years</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
+      <Header as="h2">
+        <Icon name="suitcase" />
+        <Header.Content>Experience Credentials</Header.Content>
+      </Header>
+      <Table celled>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Company</Table.HeaderCell>
+            <Table.HeaderCell>Title</Table.HeaderCell>
+            <Table.HeaderCell>Years</Table.HeaderCell>
+            <Table.HeaderCell />
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
           {experience.map(exp => (
-            <tr key={exp._id}>
-              <td>{exp.company}</td>
-              <td className="hide-sm">{exp.title}</td>
-              <td>
-                <Moment format="YYYY/MM/DD">{exp.from}</Moment> -{' '}
+            <Table.Row key={exp._id}>
+              <Table.Cell>{exp.company}</Table.Cell>
+              <Table.Cell className="hide-sm">{exp.title}</Table.Cell>
+              <Table.Cell>
+                <Moment format="YYYY/MM">{exp.from}</Moment> -{' '}
                 {exp.to === null ? (
                   ' Now'
                 ) : (
-                  <Moment format="YYYY/MM/DD">{exp.to}</Moment>
+                  <Moment format="YYYY/MM">{exp.to}</Moment>
                 )}
-              </td>
-              <td>
-                <button
-                  className="btn btn-danger"
-                  onClick={() => deleteExperience(exp._id)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
+              </Table.Cell>
+              <Table.Cell collapsing>
+                <Button
+                  inverted
+                  size="tiny"
+                  icon="trash"
+                  color="red"
+                  onClick={() => deleteExperience(exp._id)}
+                />
+              </Table.Cell>
+            </Table.Row>
           ))}
-        </tbody>
-      </table>
+        </Table.Body>
+      </Table>
     </>
   );
 };

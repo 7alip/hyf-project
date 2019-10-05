@@ -3,44 +3,50 @@ import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { deleteEducation } from '../../redux/actions/profile-actions';
+import { Table, Button, Icon, Header } from 'semantic-ui-react';
 
 const Education = ({ education, deleteEducation }) => {
   return (
     <>
-      <h2 className="my-2">Education Credentials</h2>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>School</th>
-            <th className="hide-sm">Degree</th>
-            <th className="hide-sm">Years</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
+      <Header as="h2">
+        <Icon name="graduation cap" />
+        <Header.Content>Education Credentials</Header.Content>
+      </Header>
+      <Table compact striped celled>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>School</Table.HeaderCell>
+            <Table.HeaderCell>Degree</Table.HeaderCell>
+            <Table.HeaderCell>Years</Table.HeaderCell>
+            <Table.HeaderCell />
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
           {education.map(edu => (
-            <tr key={edu._id}>
-              <td>{edu.school}</td>
-              <td className="hide-sm">{edu.degree}</td>
-              <td>
-                <Moment format="YYYY/MM/DD">{edu.from}</Moment> -{' '}
+            <Table.Row key={edu._id}>
+              <Table.Cell>{edu.school}</Table.Cell>
+              <Table.Cell>{edu.degree}</Table.Cell>
+              <Table.Cell>
+                <Moment format="YYYY/MM">{edu.from}</Moment> -{' '}
                 {edu.to === null ? (
                   ' Now'
                 ) : (
-                  <Moment format="YYYY/MM/DD">{edu.to}</Moment>
+                  <Moment format="YYYY/MM">{edu.to}</Moment>
                 )}
-              </td>
-              <td>
-                <button
-                  className="btn btn-danger"
-                  onClick={() => deleteEducation(edu._id)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
+              </Table.Cell>
+              <Table.Cell collapsing>
+                <Button
+                  inverted
+                  size="tiny"
+                  icon="trash"
+                  color="red"
+                  onClick={() => deleteEducation(edu._id)}
+                />
+              </Table.Cell>
+            </Table.Row>
           ))}
-        </tbody>
-      </table>
+        </Table.Body>
+      </Table>
     </>
   );
 };

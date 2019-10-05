@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 const PrivateRoute = ({
-  component: Component,
+  component: Children,
   isAuthenticated,
   loading,
   ...rest
@@ -15,7 +15,7 @@ const PrivateRoute = ({
       !isAuthenticated && !loading ? (
         <Redirect to="/login" />
       ) : (
-        <Component {...props} />
+        <Children {...props} />
       )
     }
   />

@@ -2,13 +2,25 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Spinner from '../layout/Spinner';
 import { getProfileById } from '../../redux/actions/profile-actions';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import ProfileExperience from './ProfileExperience';
 import ProfileEducation from './ProfileEducation';
 import ProfileGithubRepos from './ProfileGithubRepos';
+import {
+  Loader,
+  Segment,
+  Dimmer,
+  Container,
+  Icon,
+  Card,
+  Grid,
+  Button,
+  Header,
+  Divider
+} from 'semantic-ui-react';
+import Spinner from '../layout/Spinner';
 
 const Profile = ({
   match,
@@ -21,56 +33,73 @@ const Profile = ({
   }, [getProfileById, match.params.id]);
 
   return (
-    <>
-      {profile === null || loading ? (
-        <Spinner />
-      ) : (
-        <>
-          <Link to="/profiles" className="btn btn-light">
-            Back to profiles
-          </Link>
-          {auth.isAuthenticated &&
-            auth.loading === false &&
-            auth.user._id === profile.user._id && (
-              <Link to="/edit-profile" className="btn btn-dark">
-                Edit Profile
-              </Link>
-            )}
-          <div className="profile-grid my-1">
+    <Spinner loading={profile === null || loading}>
+      {profile && (
+        <Container>
+          <Button.Group style={{ marginBottom: '1rem' }}>
+            <Link to="/profiles" className="ui button secondary">
+              <Icon name="arrow left" /> Back to profiles
+            </Link>
+            {auth.isAuthenticated &&
+              auth.loading === false &&
+              auth.user._id === profile.user._id && (
+                <Link to="/edit-profile" className="ui button primary">
+                  <Icon name="edit" /> Edit Profile
+                </Link>
+              )}
+          </Button.Group>
+          <Card.Group stackable itemsPerRow={2}>
             <ProfileTop profile={profile} />
             <ProfileAbout profile={profile} />
-            <div className="profile-ext bg-white p-2">
-              <h2 className="text-primary">Experience</h2>
-              {profile.experiences.length > 0 ? (
-                <>
-                  {profile.experiences.map(exp => (
-                    <ProfileExperience key={exp._id} experience={exp} />
-                  ))}
-                </>
-              ) : (
-                <h4>No experience credentials</h4>
-              )}
-            </div>
-            <div className="profile-edu bg-white p-2">
-              <h2 className="text-primary">Education</h2>
-              <h2 className="text-primary">Education</h2>
-              {profile.education.length > 0 ? (
-                <>
-                  {profile.education.map(edu => (
-                    <ProfileEducation key={edu._id} education={edu} />
-                  ))}
-                </>
-              ) : (
-                <h4>No education credentials</h4>
-              )}
-            </div>
+            <Card>
+              <Card.Content>
+                <Header as="h1">
+                  <Icon name="suitcase" /> Experience
+                </Header>
+                <Divider />
+                {profile.experiences.length > 0 ? (
+                  <>
+                    {profile.experiences.map((exp, index) => (
+                      <>
+                        <ProfileExperience key={exp._id} experience={exp} />
+                        {index !== profile.experiences.length - 1 && (
+                          <Divider />
+                        )}
+                      </>
+                    ))}
+                  </>
+                ) : (
+                  <h4>No experience credentials</h4>
+                )}
+              </Card.Content>
+            </Card>
+            <Card>
+              <Card.Content>
+                <Header as="h1">
+                  <Icon name="graduation cap" /> Education
+                </Header>
+                <Divider />
+                {profile.education.length > 0 ? (
+                  <>
+                    {profile.education.map((edu, index) => (
+                      <>
+                        <ProfileEducation key={edu._id} education={edu} />
+                        {index !== profile.education.length - 1 && <Divider />}
+                      </>
+                    ))}
+                  </>
+                ) : (
+                  <h4>No education credentials</h4>
+                )}
+              </Card.Content>
+            </Card>
             {profile.githubusername && (
               <ProfileGithubRepos username={profile.githubusername} />
             )}
-          </div>
-        </>
-      )}
-    </>
+          </Card.Group>
+        </Container>
+      )}{' '}
+    </Spinner>
   );
 };
 

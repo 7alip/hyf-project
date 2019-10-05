@@ -1,19 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Icon, Grid } from 'semantic-ui-react';
 
 const DashboardActions = () => {
   return (
-    <div className="dash-buttons">
-      <Link to="/edit-profile" className="btn btn-light">
-        <i className="fas fa-user-circle text-primary"></i> Edit Profile
-      </Link>
-      <Link to="/add-experience" className="btn btn-light">
-        <i className="fab fa-black-tie text-primary"></i> Add Experience
-      </Link>
-      <Link to="/add-education" className="btn btn-light">
-        <i className="fas fa-graduation-cap text-primary"></i> Add Education
-      </Link>
-    </div>
+    <Grid columns={3}>
+      <Grid.Column>
+        <Link to="/edit-profile" className="ui button primary fluid">
+          <Icon name="edit" /> Edit Profile
+        </Link>
+      </Grid.Column>
+      <Grid.Column>
+        <Link to="/add-experience" className="ui button instagram fluid">
+          <Icon name="suitcase" /> Add Experience
+        </Link>
+      </Grid.Column>
+      <Grid.Column>
+        <Link to="/add-education" className="ui button brown fluid">
+          <Icon name="graduation cap" /> Add Education
+        </Link>
+      </Grid.Column>
+    </Grid>
   );
 };
 

@@ -8,6 +8,7 @@ import {
   removeLike,
   deletePost
 } from '../../redux/actions/post-actions';
+import { Icon, Card, Image, Button } from 'semantic-ui-react';
 
 const PostItem = ({
   auth,
@@ -18,51 +19,60 @@ const PostItem = ({
   showActions
 }) => {
   return (
-    <div className="post bg-white p-1 my-1">
-      <div>
-        <Link to={`/profile/${user}`}>
-          <img className="round-img" src={avatar} alt={name} />
-          <h4>{name}</h4>
-        </Link>
-      </div>
-      <div>
-        <p className="my-1">{text}</p>
-        <p className="post-date">
-          Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
-        </p>
-        {showActions && (
-          <>
-            <button
-              type="button"
-              className="btn btn-light"
-              onClick={() => addLike(_id)}>
-              <i className="fas fa-thumbs-up"></i>{' '}
-              {likes.length > 0 && <span>{likes.length}</span>}
-            </button>
-            <button
-              type="button"
-              className="btn btn-light"
-              onClick={() => removeLike(_id)}>
-              <i className="fas fa-thumbs-down"></i>
-            </button>
-            <Link to={`/posts/${_id}`} className="btn btn-primary">
-              Discussion{' '}
-              {comments.length > 0 && (
-                <span className="comment-count">{comments.length}</span>
-              )}
-            </Link>
-            {!auth.loading && auth.user._id && (
-              <button
-                type="button"
-                className="btn btn-danger"
-                onClick={() => deletePost(_id)}>
-                <i className="fas fa-times"></i>
-              </button>
+    <Card fluid>
+      <Card.Content>
+        <Card.Header
+          style={{ display: 'flex', alignItems: 'center' }}
+          as={Link}
+          to={`/profile/${user}`}>
+          <Image size="tiny" floated="left" circular src={avatar} alt={name} />
+          <Card.Content>{name}</Card.Content>
+        </Card.Header>
+        <Card.Meta>
+          <p>
+            Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
+          </p>
+        </Card.Meta>
+        <Card.Description>
+          <div>
+            <p className="my-1">{text}</p>
+            {showActions && (
+              <>
+                <Button
+                  icon
+                  type="button"
+                  className="btn btn-light"
+                  onClick={() => addLike(_id)}>
+                  <Icon name="thumbs up" />{' '}
+                  {likes.length > 0 && <span>{likes.length}</span>}
+                </Button>
+                <Button
+                  icon
+                  type="button"
+                  className="btn btn-light"
+                  onClick={() => removeLike(_id)}>
+                  <Icon name="thumbs down" />{' '}
+                </Button>
+                <Link to={`/posts/${_id}`} className="ui button primary">
+                  Discussion{' '}
+                  {comments.length > 0 && <span>{comments.length}</span>}
+                </Link>
+                {!auth.loading && auth.user._id && (
+                  <Button
+                    icon
+                    color="red"
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => deletePost(_id)}>
+                    <Icon name="times" />
+                  </Button>
+                )}
+              </>
             )}
-          </>
-        )}
-      </div>
-    </div>
+          </div>
+        </Card.Description>
+      </Card.Content>
+    </Card>
   );
 };
 

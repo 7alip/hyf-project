@@ -1,9 +1,18 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Spinner from '../layout/Spinner';
 import { getProfiles } from '../../redux/actions/profile-actions';
 import ProfileItem from './ProfileItem';
+import {
+  Loader,
+  Segment,
+  Dimmer,
+  Container,
+  Grid,
+  Card,
+  Icon
+} from 'semantic-ui-react';
+import Spinner from '../layout/Spinner';
 
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   useEffect(() => {
@@ -11,28 +20,23 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   }, [getProfiles]);
 
   return (
-    <>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <>
-          <h1 className="large text-primary">Developers</h1>
-          <p className="lead">
-            <i className="fab fa-connectdevelop"></i> Browse and connect with
-            developers
-          </p>
-          <div className="profiles">
-            {profiles.length > 0 ? (
-              profiles.map(profile => (
-                <ProfileItem key={profile._id} profile={profile} />
-              ))
-            ) : (
-              <h4>No profile found</h4>
-            )}
-          </div>
-        </>
-      )}
-    </>
+    <Spinner loading={loading}>
+      <Container>
+        <h1>Developers</h1>
+        <p>
+          <Icon name="connectdevelop" /> Browse and connect with developers
+        </p>
+        <Card.Group centered as={Grid} stackable itemsPerRow="two">
+          {profiles.length > 0 ? (
+            profiles.map(profile => (
+              <ProfileItem key={profile._id} profile={profile} />
+            ))
+          ) : (
+            <h4>No profile found</h4>
+          )}
+        </Card.Group>
+      </Container>
+    </Spinner>
   );
 };
 

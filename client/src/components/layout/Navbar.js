@@ -3,56 +3,54 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../redux/actions/auth-action';
+import { Icon, Menu, Container } from 'semantic-ui-react';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
-    <ul>
-      <li>
-        <Link to="/profiles">Developers</Link>
-      </li>
-      <li>
-        <Link to="/dashboard">
-          <i className="fas fa-user"></i>{' '}
-          <span className="hide-sm">Dashboard</span>
-        </Link>
-      </li>
-      <li>
-        <Link to="/posts">
-          <span className="hide-sm">Posts</span>
-        </Link>
-      </li>
-      <li>
-        <a onClick={logout} href="#!">
-          <i className="fas fa-sign-out-alt"></i>{' '}
-          <span className="hide-sm">Logout</span>
-        </a>
-      </li>
-    </ul>
+    <>
+      <Menu.Item as={Link} to="/profiles">
+        Developers
+      </Menu.Item>
+      <Menu.Item as={Link} to="/dashboard">
+        <Icon name="dashboard" /> Dashboard
+      </Menu.Item>
+      <Menu.Item as={Link} to="/posts">
+        Posts
+      </Menu.Item>
+      <Menu.Item as="a" onClick={logout} href="#!">
+        <Icon name="sign-out alternate" /> Logout
+      </Menu.Item>
+    </>
   );
 
   const guesLinks = (
-    <ul>
-      <li>
-        <Link to="/profiles">Developers</Link>
-      </li>
-      <li>
-        <Link to="/register">Register</Link>
-      </li>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
-    </ul>
+    <>
+      <Menu.Item as={Link} to="/profiles">
+        Developers
+      </Menu.Item>
+      <Menu.Item as={Link} to="/register">
+        Register
+      </Menu.Item>
+      <Menu.Item as={Link} to="/login">
+        Login
+      </Menu.Item>
+    </>
   );
 
   return (
-    <nav className="navbar bg-dark">
-      <h1>
-        <Link to="/">
-          <i className="fas fa-code"></i> DevConnector
-        </Link>
-      </h1>
-      {!loading && <>{isAuthenticated ? authLinks : guesLinks}</>}
-    </nav>
+    <Menu
+      style={{ backgroundColor: 'rgba(0,0,0,.7)', height: '4rem' }}
+      inverted
+      borderless
+      fixed="top"
+      size="large">
+      <Menu.Item as={Link} to="/" header>
+        <Icon name="code" /> HackYourSocial
+      </Menu.Item>
+      <Menu.Menu position="right">
+        {!loading && <>{isAuthenticated ? authLinks : guesLinks}</>}
+      </Menu.Menu>
+    </Menu>
   );
 };
 

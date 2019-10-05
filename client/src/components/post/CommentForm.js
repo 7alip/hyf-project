@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addComment } from '../../redux/actions/post-actions';
+import { Form, TextArea, Button, Segment } from 'semantic-ui-react';
 
 const CommentForm = ({ addComment, postId }) => {
   const [text, setText] = useState('');
@@ -15,22 +16,24 @@ const CommentForm = ({ addComment, postId }) => {
   };
 
   return (
-    <div className="post-form">
-      <div className="bg-primary p">
-        <h3>Leave a comment</h3>
-      </div>
-      <form className="form my-1" onSubmit={handleSubmit}>
-        <textarea
-          name="text"
-          cols="30"
-          rows="5"
-          placeholder="Leave a comment"
-          value={text}
-          onChange={handleChange}
-          required></textarea>
-        <input type="submit" className="btn btn-dark my-1" value="Submit" />
-      </form>
-    </div>
+    <Segment padded>
+      <Form className="form my-1" onSubmit={handleSubmit}>
+        <Form.Field>
+          <label>Leave a Comment</label>
+          <TextArea
+            name="text"
+            cols="30"
+            rows="5"
+            placeholder="Leave a comment"
+            value={text}
+            onChange={handleChange}
+            required></TextArea>
+        </Form.Field>
+        <Form.Field>
+          <Button primary>Submit</Button>
+        </Form.Field>
+      </Form>
+    </Segment>
   );
 };
 

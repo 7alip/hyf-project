@@ -7,9 +7,18 @@ import {
   deleteAccount
 } from '../../redux/actions/profile-actions';
 import DashboardActions from './DashboardActions';
-import Spinner from '../layout/Spinner';
 import Experience from './Experience';
 import Education from './Education';
+import {
+  Loader,
+  Segment,
+  Dimmer,
+  Container,
+  Button,
+  Icon,
+  Grid
+} from 'semantic-ui-react';
+import Spinner from '../layout/Spinner';
 
 const Dashboard = ({
   getCurrentProfile,
@@ -21,35 +30,47 @@ const Dashboard = ({
     if (!profile) getCurrentProfile();
   }, [getCurrentProfile, profile]);
 
-  return loading && profile === null ? (
-    <Spinner />
-  ) : (
-    <>
-      <h1 className="large text-primary">Dashboard</h1>
-      <p className="lead">
-        <i className="fas fa-user"></i> Welcome {user && user.name}
+  return (
+    <Spinner loading={loading && profile === null}>
+      <h1>Dashboard</h1>
+      <p>
+        <Icon name="user" /> Welcome {user && user.name}
       </p>
       {profile === null ? (
         <>
           <p>You have not yet setup a profile, please add some info</p>
-          <Link to="/create-profile" className="btn btn-primary my-1">
+          <Link to="/create-profile" className="ui button primary">
             Create Profile
           </Link>
         </>
       ) : (
         <>
           <DashboardActions />
-          <Experience experience={profile.experiences} />
-          <Education education={profile.education} />
+          <Grid stackable columns={2} style={{ margin: '1rem 0' }}>
+            <Grid.Column>
+              {profile.experiences.length > 0 && (
+                <Experience experience={profile.experiences} />
+              )}
+            </Grid.Column>
+            <Grid.Column>
+              {profile.education.length > 0 && (
+                <Education education={profile.education} />
+              )}
+            </Grid.Column>
+          </Grid>
 
-          <div className="my-2">
-            <button className="btn btn-danger" onClick={() => deleteAccount()}>
-              <i className="fas fa-user-minus"></i> Delete My Account
-            </button>
+          <div style={{ padding: '1rem 0' }}>
+            <Button
+              icon
+              labelPosition="left"
+              color="red"
+              onClick={() => deleteAccount()}>
+              <Icon name="user times" /> Delete My Account
+            </Button>
           </div>
         </>
       )}
-    </>
+    </Spinner>
   );
 };
 

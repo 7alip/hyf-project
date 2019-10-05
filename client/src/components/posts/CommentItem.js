@@ -4,6 +4,15 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { deleteComment } from '../../redux/actions/post-actions';
 import Moment from 'react-moment';
+import {
+  Icon,
+  Button,
+  Image,
+  Segment,
+  Card,
+  List,
+  Header
+} from 'semantic-ui-react';
 
 const CommentItem = ({
   auth,
@@ -12,28 +21,31 @@ const CommentItem = ({
   deleteComment
 }) => {
   return (
-    <div className="post bg-white p-1 my-1">
-      <div>
-        <Link to={`/profile/${user}`}>
-          <img className="round-img" src={avatar} alt={name} />
-          <h4>{name}</h4>
-        </Link>
-      </div>
-      <div>
-        <p className="my-1">{text}</p>
-        <p className="post-date">
-          Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
-        </p>
+    <Card fluid>
+      <Card.Content as={Link} to={`/profile/${user}`}>
+        <Image size="mini" floated="left" circular src={avatar} alt={name} />
         {!auth.loading && auth.user._id === user && (
-          <button
+          <Button
+            floated="right"
+            size="mini"
+            inverted
+            icon
+            color="red"
             type="button"
             className="btn btn-danger"
             onClick={() => deleteComment(postId, _id)}>
-            <i className="fas fa-times"></i>
-          </button>
+            <Icon name="trash" />
+          </Button>
         )}
-      </div>
-    </div>
+        <Card.Header>{name}</Card.Header>
+        <Card.Meta>
+          Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
+        </Card.Meta>
+        <Card.Description>
+          <p>{text}</p>
+        </Card.Description>
+      </Card.Content>
+    </Card>
   );
 };
 

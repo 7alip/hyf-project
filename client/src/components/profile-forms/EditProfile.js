@@ -6,6 +6,20 @@ import {
   createProfile,
   getCurrentProfile
 } from '../../redux/actions/profile-actions';
+import {
+  Form,
+  Select,
+  Input,
+  TextArea,
+  Button,
+  Segment,
+  Label,
+  Card,
+  Icon,
+  Divider,
+  Popup
+} from 'semantic-ui-react';
+import Spinner from '../layout/Spinner';
 
 const EditProfile = ({
   profile: { profile, loading },
@@ -73,177 +87,240 @@ const EditProfile = ({
     createProfile(formData, history, true);
   };
 
+  const options = [
+    { key: 'Developer', value: 'Developer', text: 'Developer' },
+    {
+      key: 'Junior Developer',
+      value: 'Junior Developer',
+      text: 'Junior Developer'
+    },
+    {
+      key: 'Senior Developer',
+      value: 'Senior Developer',
+      text: 'Senior Developer'
+    },
+    { key: 'Manager', value: 'Manager', text: 'Manager' },
+    {
+      key: 'Student or Learning',
+      value: 'Student or Learning',
+      text: 'Student or Learning'
+    },
+    { key: 'Instructor', value: 'Instructor', text: 'Instructor' },
+    { key: 'Intern', value: 'Intern', text: 'Intern' },
+    { key: 'Other', value: 'Other', text: 'Other' }
+  ];
+
   return (
-    <>
-      {console.log('rendered')}
-      <h1 className="large text-primary">Edit Your Profile</h1>
-      <p className="lead">
-        <i className="fas fa-user"></i> Let's get some information to make your
-        profile stand out
-      </p>
-      <small>* = required field</small>
-      {!loading && (
-        <form className="form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <select name="status" value={status} onChange={handleChange}>
-              <option value="0">* Select Professional Status</option>
-              <option value="Developer">Developer</option>
-              <option value="Junior Developer">Junior Developer</option>
-              <option value="Senior Developer">Senior Developer</option>
-              <option value="Manager">Manager</option>
-              <option value="Student or Learning">Student or Learning</option>
-              <option value="Instructor">Instructor or Teacher</option>
-              <option value="Intern">Intern</option>
-              <option value="Other">Other</option>
-            </select>
-            <small className="form-text">
-              Give us an idea of where you are at in your career
-            </small>
-          </div>
-          <div className="form-group">
-            <input
-              type="text"
-              placeholder="Company"
-              name="company"
-              value={company}
-              onChange={handleChange}
-            />
-            <small className="form-text">
-              Could be your own company or one you work for
-            </small>
-          </div>
-          <div className="form-group">
-            <input
-              type="text"
-              placeholder="Website"
-              name="website"
-              value={website}
-              onChange={handleChange}
-            />
-            <small className="form-text">
-              Could be your own or a company website
-            </small>
-          </div>
-          <div className="form-group">
-            <input
-              type="text"
-              placeholder="Location"
-              name="location"
-              value={location}
-              onChange={handleChange}
-            />
-            <small className="form-text">
-              City & state suggested (eg. Boston, MA)
-            </small>
-          </div>
-          <div className="form-group">
-            <input
-              type="text"
-              placeholder="* Skills"
-              name="skills"
-              value={skills}
-              onChange={handleChange}
-            />
-            <small className="form-text">
-              Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
-            </small>
-          </div>
-          <div className="form-group">
-            <input
-              type="text"
-              placeholder="Github Username"
-              name="githubusername"
-              value={githubusername}
-              onChange={handleChange}
-            />
-            <small className="form-text">
-              If you want your latest repos and a Github link, include your
-              username
-            </small>
-          </div>
-          <div className="form-group">
-            <textarea
-              placeholder="A short bio of yourself"
-              name="bio"
-              value={bio}
-              onChange={handleChange}></textarea>
-            <small className="form-text">Tell us a little about yourself</small>
-          </div>
-
-          <div className="my-2">
-            <button
-              type="button"
-              className="btn btn-light"
-              onClick={() => toggleShowSocialInputs(!showSocialInputs)}>
-              Add Social Network Links
-            </button>
-            <span>Optional</span>
-          </div>
-          {showSocialInputs && (
-            <>
-              <div className="form-group social-input">
-                <i className="fab fa-twitter fa-2x"></i>
-                <input
-                  type="text"
-                  placeholder="Twitter URL"
-                  name="twitter"
-                  value={twitter}
-                  onChange={handleChange}
+    <Spinner loading={loading}>
+      <Link to="/dashboard" className="ui button secondary" href="dashboard">
+        <Icon name="arrow left" /> Go Back
+      </Link>
+      <Card fluid>
+        <Card.Content>
+          <h1>Edit Your Profile</h1>
+          <p>
+            <Icon name="user" /> Let's get some information to make your profile
+            stand out
+          </p>
+          <Divider />
+          {!loading && (
+            <Form onSubmit={handleSubmit}>
+              <Form.Group widths={2}>
+                <Form.Field>
+                  <Popup
+                    on="hover"
+                    trigger={
+                      <Select
+                        name="status"
+                        value={status}
+                        onChange={handleChange}
+                        options={options}
+                      />
+                    }
+                    header="Status"
+                    content="Give us an idea of where you are at in your career"
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <Popup
+                    on="hover"
+                    content="Could be your own company or one you work for"
+                    header="Company"
+                    trigger={
+                      <Input
+                        type="text"
+                        placeholder="Company"
+                        name="company"
+                        value={company}
+                        onChange={handleChange}
+                      />
+                    }
+                  />
+                </Form.Field>
+              </Form.Group>
+              <Form.Group widths={2}>
+                <Form.Field>
+                  <Popup
+                    on="hover"
+                    header="Website"
+                    content="Could be your own or a company website"
+                    trigger={
+                      <Input
+                        type="text"
+                        placeholder="Website"
+                        name="website"
+                        value={website}
+                        onChange={handleChange}
+                      />
+                    }
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <Popup
+                    on="hover"
+                    header="Location"
+                    content="City & state suggested (eg. Boston, MA)"
+                    trigger={
+                      <Input
+                        type="text"
+                        placeholder="Location"
+                        name="location"
+                        value={location}
+                        onChange={handleChange}
+                      />
+                    }
+                  />
+                </Form.Field>
+              </Form.Group>
+              <Form.Group widths={2}>
+                <Form.Field>
+                  <Popup
+                    on="hover"
+                    header="Skills"
+                    content="Please use comma separated values (eg.
+                    HTML,CSS,JavaScript,PHP)"
+                    trigger={
+                      <Input
+                        type="text"
+                        placeholder="* Skills"
+                        name="skills"
+                        value={skills}
+                        onChange={handleChange}
+                      />
+                    }
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <Popup
+                    on="hover"
+                    header="Github Username"
+                    content="If you want your latest repos and a Github link, include
+                    your username"
+                    trigger={
+                      <Input
+                        type="text"
+                        placeholder="Github Username"
+                        name="githubusername"
+                        value={githubusername}
+                        onChange={handleChange}
+                      />
+                    }
+                  />
+                </Form.Field>
+              </Form.Group>
+              <Form.Field>
+                <Popup
+                  on="hover"
+                  header="Bio"
+                  content="Tell us a little about yourself"
+                  trigger={
+                    <TextArea
+                      placeholder="A short bio of yourself"
+                      name="bio"
+                      value={bio}
+                      onChange={handleChange}
+                    />
+                  }
                 />
-              </div>
+              </Form.Field>
 
-              <div className="form-group social-input">
-                <i className="fab fa-facebook fa-2x"></i>
-                <input
-                  type="text"
-                  placeholder="Facebook URL"
-                  name="facebook"
-                  value={facebook}
-                  onChange={handleChange}
-                />
-              </div>
+              <Form.Field>
+                <Button
+                  secondary
+                  onClick={() => toggleShowSocialInputs(!showSocialInputs)}>
+                  Add Social Network Links
+                </Button>
+                <Label>Optional</Label>
+              </Form.Field>
+              {showSocialInputs && (
+                <>
+                  <Form.Field>
+                    <Input
+                      icon="twitter"
+                      iconPosition="left"
+                      type="text"
+                      placeholder="Twitter URL"
+                      name="twitter"
+                      value={twitter}
+                      onChange={handleChange}
+                    />
+                  </Form.Field>
 
-              <div className="form-group social-input">
-                <i className="fab fa-youtube fa-2x"></i>
-                <input
-                  type="text"
-                  placeholder="YouTube URL"
-                  name="youtube"
-                  value={youtube}
-                  onChange={handleChange}
-                />
-              </div>
+                  <Form.Field>
+                    <Input
+                      icon="facebook"
+                      iconPosition="left"
+                      type="text"
+                      placeholder="Facebook URL"
+                      name="facebook"
+                      value={facebook}
+                      onChange={handleChange}
+                    />
+                  </Form.Field>
 
-              <div className="form-group social-input">
-                <i className="fab fa-linkedin fa-2x"></i>
-                <input
-                  type="text"
-                  placeholder="Linkedin URL"
-                  name="linkedin"
-                  value={linkedin}
-                  onChange={handleChange}
-                />
-              </div>
+                  <Form.Field>
+                    <Input
+                      icon="youtube"
+                      iconPosition="left"
+                      type="text"
+                      placeholder="YouTube URL"
+                      name="youtube"
+                      value={youtube}
+                      onChange={handleChange}
+                    />
+                  </Form.Field>
 
-              <div className="form-group social-input">
-                <i className="fab fa-instagram fa-2x"></i>
-                <input
-                  type="text"
-                  placeholder="Instagram URL"
-                  name="instagram"
-                  value={instagram}
-                  onChange={handleChange}
-                />
-              </div>
-            </>
+                  <Form.Field>
+                    <Input
+                      icon="linkedin"
+                      iconPosition="left"
+                      type="text"
+                      placeholder="Linkedin URL"
+                      name="linkedin"
+                      value={linkedin}
+                      onChange={handleChange}
+                    />
+                  </Form.Field>
+
+                  <Form.Field>
+                    <Input
+                      icon="instagram"
+                      iconPosition="left"
+                      type="text"
+                      placeholder="Instagram URL"
+                      name="instagram"
+                      value={instagram}
+                      onChange={handleChange}
+                    />
+                  </Form.Field>
+                </>
+              )}
+              <Button primary>Submit</Button>
+            </Form>
           )}
-          <input type="submit" className="btn btn-primary my-1" />
-          <Link to="/dashboard" className="btn btn-light my-1" href="dashboard">
-            Go Back
-          </Link>
-        </form>
-      )}
-    </>
+        </Card.Content>
+      </Card>
+    </Spinner>
   );
 };
 

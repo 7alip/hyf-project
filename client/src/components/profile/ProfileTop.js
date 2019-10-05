@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Card, Image, Icon, Button } from 'semantic-ui-react';
 
 const ProfileTop = ({
   profile: {
@@ -12,51 +13,97 @@ const ProfileTop = ({
   }
 }) => {
   return (
-    <div className="profile-top bg-primary p-2">
-      <img className="round-img my-1" src={avatar} alt={name} />
-      <h1 className="large">{name}</h1>
-      <p className="lead">
-        {status} {company && <span>at {company}</span>}
-      </p>
-      <p>{location && <span>{location}</span>}</p>
-      {social && (
-        <div className="icons my-1">
-          {website && (
-            <a href={website} target="_blank" rel="noopener noreferrer">
-              <i className="fas fa-globe fa-2x"></i>
-            </a>
-          )}
-          {social.twitter && (
-            <a href={social.twitter} target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-twitter fa-2x"></i>
-            </a>
-          )}
-          {social.facebook && (
-            <a href={social.facebook} target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-facebook fa-2x"></i>
-            </a>
-          )}
-          {social.linkedin && (
-            <a href={social.linkedin} target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-linkedin fa-2x"></i>
-            </a>
-          )}
-          {social.youtube && (
-            <a href={social.youtube} target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-youtube fa-2x"></i>
-            </a>
-          )}
-          {social.instagram && (
-            <a
-              href={social.instagram}
-              target="_blank"
-              rel="noopener noreferrer">
-              <i className="fab fa-instagram fa-2x"></i>
-            </a>
-          )}
-        </div>
-      )}
-    </div>
+    <Card>
+      <Image centered src={avatar} alt={name} circular />
+      <Card.Content textAlign="center">
+        <Card.Header as="h1">{name}</Card.Header>
+        <Card.Meta>
+          <p>
+            <Icon name="suitcase" /> {status}{' '}
+            {company && <span>at {company}</span>}
+          </p>
+          <p>
+            <Icon name="map marker alternate" /> <span>{location}</span>
+          </p>
+        </Card.Meta>
+        {social && (
+          <Card.Description>
+            {website && (
+              <Button
+                icon
+                as="a"
+                circular
+                color="grey"
+                href={website}
+                target="_blank"
+                rel="noopener noreferrer">
+                <Icon size="large" name="globe" />
+              </Button>
+            )}
+            {social.twitter && (
+              <Button
+                icon
+                as="a"
+                circular
+                color="twitter"
+                href={social.twitter}
+                target="_blank"
+                rel="noopener noreferrer">
+                <Icon size="large" name="twitter" />
+              </Button>
+            )}
+            {social.facebook && (
+              <Button
+                icon
+                as="a"
+                circular
+                color="facebook"
+                href={social.facebook}
+                target="_blank"
+                rel="noopener noreferrer">
+                <Icon size="large" name="facebook" />
+              </Button>
+            )}
+            {social.linkedin && (
+              <Button
+                icon
+                as="a"
+                circular
+                color="linkedin"
+                href={social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer">
+                <Icon size="large" name="linkedin" />
+              </Button>
+            )}
+            {social.youtube && (
+              <Button
+                icon
+                as="a"
+                circular
+                color="youtube"
+                href={social.youtube}
+                target="_blank"
+                rel="noopener noreferrer">
+                <Icon size="large" name="youtube" />
+              </Button>
+            )}
+            {social.instagram && (
+              <Button
+                icon
+                as="a"
+                circular
+                color="instagram"
+                href={social.instagram}
+                target="_blank"
+                rel="noopener noreferrer">
+                <Icon color="instagram" size="large" name="instagram" />
+              </Button>
+            )}
+          </Card.Description>
+        )}
+      </Card.Content>
+    </Card>
   );
 };
 
