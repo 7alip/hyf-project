@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb+srv://7alip:bastiann@mern-tutorial-ttk4j.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken",
+  "githubClientId": "a7d601d5a26cfff96c09",
+  "githubSecret": "0b9359279f9ad0c9edda3892dfe9924c3e5978bf"
+}
